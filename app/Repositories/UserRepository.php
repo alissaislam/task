@@ -2,23 +2,24 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use App\Enums\UserRole;
+use App\Enums\TaskStatus;
 use App\Classes\BaseRepository;
 
 class UserRepository extends BaseRepository
 {
     protected string $model = User::class;
-    //  public function save(array $data): User
-    // {
-    //     \DB::beginTransaction();
-    //     $id = isset($data['id']) ? $data['id'] : NULL;
-    //     $data = Arr::except($data, 'id');
-    //     $user = $this->model::updateOrCreate([
-    //         'id' => $id,
-    //     ], $data);
+    public function getUsersWithCompletedTasks(int $perPage = 10)
+    {
+        return $this->model::where('role', UserRole::USER)
+            ->with([
+                'tasks' => function ($query) {
+                    $query->where('status', TaskStatus::COMPLETED)
+                        ->orderBy('due_date', 'desc');
+                }
+            ])
+            ->paginate($perPage);
+    }
 
-    //     \DB::commit();
-
-    //     return $user;
-    // }
 
 }

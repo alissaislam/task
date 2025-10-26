@@ -70,10 +70,10 @@ abstract class BaseRepository implements RepositoryInterface
 
     public function get(?int $page = 1, ?int $per_page = 10)
     {
-        $class_traits = class_uses_recursive($this->model);
-        if (!in_array(Filterable::class, $class_traits)) {
+        // $class_traits = class_uses_recursive($this->model);
+        // if (!in_array(Filterable::class, $class_traits)) {
             return $this->model::paginate(page: $page, perPage: $per_page);
-        }
-        return $this->model::filter()->paginate(page: $page, perPage: $per_page);
+        // }
+        // return $this->model::filter()->paginate(page: $page, perPage: $per_page);
     }
 }

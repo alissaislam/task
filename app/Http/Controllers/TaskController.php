@@ -42,7 +42,7 @@ class TaskController extends Controller
     /**
      * Store a newly created task in storage.
      */
-    public function store(SaveTaskRequest $request): RedirectResponse // Updated to SaveTaskRequest
+    public function store(SaveTaskRequest $request): RedirectResponse
     {
         $userId = auth()->id();
         $this->taskService->createTask($request->validated(), $userId);
@@ -85,7 +85,7 @@ class TaskController extends Controller
     /**
      * Update the specified task in storage.
      */
-    public function update(SaveTaskRequest $request, int $id): RedirectResponse // Updated to SaveTaskRequest
+    public function update(SaveTaskRequest $request, int $id): RedirectResponse
     {
         $userId = auth()->id();
         $task = $this->taskService->updateTask($id, $userId, $request->validated());
