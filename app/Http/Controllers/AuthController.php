@@ -35,7 +35,8 @@ class AuthController extends Controller
         
         Auth::login($user);
         
-        return redirect()->route('dashboard')
+        // Redirect to tasks index instead of dashboard
+        return redirect()->route('user.tasks.index')
             ->with('success', 'Registration successful! Welcome to Task Management System.');
     }
 
@@ -57,7 +58,8 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
             
-            return redirect()->intended(route('dashboard'))
+            // Redirect to tasks index instead of dashboard
+            return redirect()->intended(route('user.tasks.index'))
                 ->with('success', 'Login successful! Welcome back.');
         }
         
