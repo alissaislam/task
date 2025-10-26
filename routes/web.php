@@ -8,7 +8,7 @@ use App\Http\Controllers\TaskController;
 Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
     Route::post('/register', [AuthController::class, 'register']);
-    
+
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 });
@@ -16,8 +16,7 @@ Route::middleware('guest')->group(function () {
 // Protected routes
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
-    // User Task Management Routes (this will be our main dashboard)
+
     Route::prefix('user/tasks')->name('user.tasks.')->group(function () {
         Route::get('/', [TaskController::class, 'index'])->name('index');
         Route::get('/create', [TaskController::class, 'create'])->name('create');

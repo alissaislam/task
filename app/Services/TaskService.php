@@ -20,6 +20,11 @@ class TaskService extends BaseService
     /**
      * Get all tasks for a specific user
      */
+   public function getUserTasksPaginated(int $userId, int $perPage = 10)
+    {
+        return $this->taskRepository->getUserTasksPaginated($userId, $perPage);
+    }
+
     public function getUserTasks(int $userId): Collection
     {
         return $this->taskRepository->findWhere(['user_id' => $userId]);

@@ -21,10 +21,12 @@ class TaskController extends Controller
     /**
      * Display a listing of the tasks.
      */
-    public function index(): View
+   public function index(Request $request): View
     {
         $userId = auth()->id();
-        $tasks = $this->taskService->getUserTasks($userId);
+        $perPage = $request->get('per_page', 10); // Get per_page from request or default to 10
+        
+        $tasks = $this->taskService->getUserTasksPaginated($userId, $perPage);
         $stats = $this->taskService->getUserTaskStats($userId);
 
         return view('user.tasks.index', compact('tasks', 'stats'));
