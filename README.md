@@ -52,3 +52,6 @@ Email: islam.alissa2002@gmail.com / jane@example.com
 Password: password
 
 Role: User
+
+For Admin apis
+use Postman_Collection.json file
